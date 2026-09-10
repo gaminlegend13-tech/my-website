@@ -41,14 +41,14 @@ export const siteData = {
       name: "G2 Pharmacy — Head Office",
       location: "Elwa Junction, Monrovia, Liberia",
       type: "Retail",
-      image: "https://images.pexels.com/photos/6062808/pexels-photo-6062808.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/headoffice.png",
       isHeadOffice: true,
     },
     {
       name: "G2 Pharmacy — Branch One",
       location: "SD Cooper Road, Monrovia, Liberia",
       type: "Retail",
-      image: "https://images.pexels.com/photos/17976150/pexels-photo-17976150.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "branch1.png",
     },
     {
       name: "G2 Pharmacy — Branch Two",
