@@ -48,7 +48,7 @@ export const siteData = {
       name: "G2 Pharmacy — Branch One",
       location: "SD Cooper Road, Monrovia, Liberia",
       type: "Retail",
-      image: "branch1.png",
+      image: "/branch1.png",
     },
     {
       name: "G2 Pharmacy — Branch Two",
@@ -60,13 +60,13 @@ export const siteData = {
       name: "G2 Pharmacy — Branch Three",
       location: "Beside JFK Hospital, Sinkor, Monrovia, Liberia",
       type: "Retail",
-      image: "https://images.pexels.com/photos/9538596/pexels-photo-9538596.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/branch3.png",
     },
     {
       name: "G2 Pharmacy — Branch Four",
       location: "Red Light, Parker Paint Junction, Monrovia, Liberia",
       type: "Wholesale & Retail",
-      image: "https://images.pexels.com/photos/30312098/pexels-photo-30312098.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/branch4.png",
     },
   ],
 
@@ -78,12 +78,12 @@ export const siteData = {
   },
 
   productImages: [
-    "https://images.pexels.com/photos/37330388/pexels-photo-37330388.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "https://images.pexels.com/photos/3873149/pexels-photo-3873149.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "https://images.pexels.com/photos/51929/medications-cure-tablets-pharmacy-51929.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "https://images.pexels.com/photos/5452239/pexels-photo-5452239.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "https://images.pexels.com/photos/12672359/pexels-photo-12672359.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "https://images.pexels.com/photos/11211050/pexels-photo-11211050.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "/product1.png",
+    "/product2.png",
+    "/product3.png",
+    "/product4.png",
+    "/product5.png",
+    "/product6.png",
   ],
 
   donations: [
