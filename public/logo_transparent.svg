@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">G2 Pharmacy</title>
+  <desc id="desc">G2 Pharmacy logo with a blue G, silver 2, teal cross and leaf</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#39bde8"/><stop offset="1" stop-color="#0067aa"/></linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f4f4"/><stop offset="1" stop-color="#8b8d90"/></linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#42d6d8"/><stop offset="1" stop-color="#006f72"/></linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#80ddbd"/><stop offset="1" stop-color="#006c58"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#12334a" flood-opacity=".35"/></filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path fill="url(#blue)" d="M535 147c-55-46-128-72-206-72C156 75 16 220 16 403c0 184 140 327 313 327 74 0 144-22 204-67V461H388v111c-18 10-38 15-59 15-89 0-153-75-153-184 0-111 65-187 159-187 47 0 87 15 118 44z"/>
+    <path fill="url(#blue)" d="M525 352h183v112H525z"/>
+    <path fill="url(#silver)" d="M615 159c13-31 43-51 78-51h132c117 0 184 69 184 162 0 62-25 106-91 173L761 590h251v116H585V593l242-255c32-34 45-57 45-79 0-24-17-38-47-38h-85c-29 0-51 18-59 46z"/>
+    <path fill="url(#teal)" d="M294 278h66v65h66c25 0 45 20 45 45v58c0 25-20 45-45 45h-66v67c0 25-20 45-45 45h-58c-25 0-45-20-45-45v-67h-65c-25 0-45-20-45-45v-58c0-25 20-45 45-45h65v-65c0-25 20-45 45-45z"/>
+    <path fill="url(#leaf)" d="M346 505c25-107 101-150 193-154-8 89-63 153-169 171l-31 4c28-32 62-57 101-77-46 10-73 25-94 56z"/>
+    <text x="505" y="845" text-anchor="middle" fill="url(#blue)" font-family="Arial,Helvetica,sans-serif" font-size="92" font-weight="800" letter-spacing="7">PHARMACY</text>
+  </g>
+</svg>
