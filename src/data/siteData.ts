@@ -103,7 +103,7 @@ export const siteData = {
       title: "Volunteer & Aid Programs",
       description:
         "Our team actively participates in volunteer initiatives, distributing food and medicine to communities in need throughout Liberia.",
-      image: "https://images.pexels.com/photos/6646878/pexels-photo-6646878.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/donation3.png",
     },
   ],
 };
