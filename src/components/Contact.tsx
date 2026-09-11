@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { siteData } from "@/data/siteData";
 import { supabase } from "@/lib/supabase";
 
@@ -83,7 +84,10 @@ export default function Contact() {
                   <Phone className="h-6 w-6 text-primary-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Phone (WhatsApp)</p>
+                  <p className="flex items-center gap-1.5 text-sm font-medium text-slate-400">
+                    Phone
+                    <WhatsAppIcon className="h-4 w-4 text-green-600" />
+                  </p>
                   <p className="text-base font-semibold text-slate-900">{siteData.phone}</p>
                 </div>
               </a>
