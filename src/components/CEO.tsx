@@ -13,7 +13,7 @@ export default function CEO() {
         src="/logo_transparent.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-1/2 h-[140%] w-auto -translate-y-1/2 translate-x-1/4 opacity-[0.06]"
+        className="pointer-events-none absolute right-4 top-1/2 aspect-square w-[24rem] max-w-none -translate-y-1/2 opacity-[0.08] sm:right-10 sm:w-[30rem] lg:w-[36rem]"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
