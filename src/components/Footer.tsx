@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook } from "lucide-react";
 import { siteData } from "@/data/siteData";
 
 const navLinks = [
@@ -53,6 +53,15 @@ export default function Footer() {
                 <MapPin className="h-4 w-4" />
                 Elwa Junction, Monrovia, Liberia
               </div>
+              <a
+                href={siteData.facebookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-primary-200 transition-colors hover:text-white"
+              >
+                <Facebook className="h-4 w-4" />
+                Follow us on Facebook
+              </a>
             </div>
           </div>
 
