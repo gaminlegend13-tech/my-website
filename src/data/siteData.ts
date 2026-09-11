@@ -34,7 +34,7 @@ export const siteData = {
       title: "Hospital Supplies",
       description:
         "Comprehensive hospital supply services — from medical consumables to equipment — ensuring healthcare facilities stay fully stocked.",
-      image: "https://images.pexels.com/photos/5827294/pexels-photo-5827294.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/supply.png",
     },
   ],
 
