@@ -56,7 +56,7 @@ export const siteData = {
       name: "G2 Pharmacy — Branch Two",
       location: "Elwa Junction, Monrovia, Liberia",
       type: "Wholesale",
-      image: "https://images.pexels.com/photos/39221674/pexels-photo-39221674.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/branch2.png",
     },
     {
       name: "G2 Pharmacy — Branch Three",
