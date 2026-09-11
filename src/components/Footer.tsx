@@ -43,7 +43,9 @@ export default function Footer() {
                 {siteData.email}
               </a>
               <a
-                href={`tel:${siteData.phoneLink}`}
+                href={siteData.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm text-primary-200 transition-colors hover:text-white"
               >
                 <Phone className="h-4 w-4" />
