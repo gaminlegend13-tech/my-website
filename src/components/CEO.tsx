@@ -8,6 +8,14 @@ export default function CEO() {
       <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-primary-800/40 blur-3xl" />
       <div className="absolute -right-20 bottom-10 h-72 w-72 rounded-full bg-primary-700/30 blur-3xl" />
 
+      {/* Logo watermark */}
+      <img
+        src="/logo_transparent.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-1/2 h-[140%] w-auto -translate-y-1/2 translate-x-1/4 opacity-[0.06]"
+      />
+
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-5">
           {/* Image */}
