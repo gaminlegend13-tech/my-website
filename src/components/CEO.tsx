@@ -10,10 +10,10 @@ export default function CEO() {
 
       {/* Logo watermark */}
       <img
-        src="/logo_transparent.svg"
+        src="/logo_latest.jpeg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[16rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.07] sm:w-[20rem] lg:w-[24rem]"
+        className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[16rem] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain opacity-[0.07] sm:w-[20rem] lg:w-[24rem]"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
