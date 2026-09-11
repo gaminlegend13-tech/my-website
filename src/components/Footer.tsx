@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Facebook } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { siteData } from "@/data/siteData";
 
 const navLinks = [
@@ -50,6 +51,7 @@ export default function Footer() {
               >
                 <Phone className="h-4 w-4" />
                 {siteData.phone}
+                <WhatsAppIcon className="h-3.5 w-3.5 text-green-500" />
               </a>
               <div className="flex items-center gap-3 text-sm text-primary-200">
                 <MapPin className="h-4 w-4" />
