@@ -5,6 +5,7 @@ export const siteData = {
   phone: "077 8641667",
   phoneLink: "+231778641667",
   location: "Monrovia, Liberia",
+  facebookUrl: "https://www.facebook.com/profile.php?id=61577927575802",
 
   heroImage: "https://images.pexels.com/photos/8657368/pexels-photo-8657368.jpeg?auto=compress&cs=tinysrgb&w=1600",
   heroImageAlt: "Pharmacist helping a customer in a pharmacy",
