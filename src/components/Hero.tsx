@@ -23,8 +23,8 @@ export default function Hero() {
           </div>
 
           <h1 className="reveal is-visible reveal-delay-1 mt-6 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Trusted Pharmacy for
-            <span className="block text-primary-200">All of Liberia</span>
+            Your Trusted Partner
+            <span className="block text-primary-200"></span>
           </h1>
 
           <p className="reveal is-visible reveal-delay-2 mt-6 max-w-xl text-lg leading-relaxed text-primary-100/90">
