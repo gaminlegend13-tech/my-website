@@ -11,7 +11,7 @@ export const siteData = {
   heroImage: "/pharmacy1.png",
   heroImageAlt: "Pharmacist helping a customer in a pharmacy",
 
-  aboutImage: "https://images.pexels.com/photos/8657301/pexels-photo-8657301.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  aboutImage: "/pharmacist1.png",
   aboutImageAlt: "Pharmacist selecting medication from a pharmacy shelf",
 
   services: [
