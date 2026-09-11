@@ -27,7 +27,7 @@ export const siteData = {
       title: "Wholesale Distribution",
       description:
         "We supply pharmaceutical drugs and medical supplies in bulk to clinics, pharmacies, and medical facilities throughout Liberia.",
-      image: "https://images.pexels.com/photos/6129576/pexels-photo-6129576.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/warehouse.png",
     },
     {
       icon: "Stethoscope",
