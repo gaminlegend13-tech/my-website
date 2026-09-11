@@ -4,6 +4,7 @@ export const siteData = {
   email: "g2pharmacy@yahoo.com",
   phone: "077 8641667",
   phoneLink: "+231778641667",
+  whatsappLink: "https://wa.me/231778641667",
   location: "Monrovia, Liberia",
   facebookUrl: "https://www.facebook.com/profile.php?id=61577927575802",
 
