@@ -20,7 +20,7 @@ export const siteData = {
       title: "Retail Pharmacy",
       description:
         "Walk-in customers can purchase pharmaceutical drugs and medical supplies directly from any of our retail branches across Monrovia.",
-      image: "https://images.pexels.com/photos/8657366/pexels-photo-8657366.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "retail1.png",
     },
     {
       icon: "Package",
