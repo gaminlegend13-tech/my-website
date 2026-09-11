@@ -74,14 +74,16 @@ export default function Contact() {
               </a>
 
               <a
-                href={`tel:${siteData.phoneLink}`}
+                href={siteData.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200/60 transition-all hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100">
                   <Phone className="h-6 w-6 text-primary-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Phone</p>
+                  <p className="text-sm font-medium text-slate-400">Phone (WhatsApp)</p>
                   <p className="text-base font-semibold text-slate-900">{siteData.phone}</p>
                 </div>
               </a>
