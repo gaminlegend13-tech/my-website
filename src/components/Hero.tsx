@@ -1,95 +1,102 @@
-import { ArrowRight, ShieldCheck, Truck, HeartPulse } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import Img from "@/components/Img";
+import Plus from "@/components/Plus";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+
+const stats = [
+  { value: `${siteData.yearsOfService}+`, label: "Years serving Liberia" },
+  { value: `${siteData.branches.length}`, label: "Branches in Monrovia" },
+  { value: `${siteData.services.length}`, label: "Core services" },
+];
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img
-          src={siteData.heroImage}
-          alt={siteData.heroImageAlt}
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-950/90 via-primary-900/80 to-primary-800/60" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-32 pb-20 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <div className="reveal is-visible inline-flex items-center gap-2 rounded-full border border-primary-300/30 bg-primary-800/40 px-4 py-1.5 text-sm font-medium text-primary-100 backdrop-blur-sm">
-            <ShieldCheck className="h-4 w-4 text-accent-400" />
-            Serving Liberia since {siteData.establishedYear}
-          </div>
-
-          <h1 className="reveal is-visible reveal-delay-1 mt-6 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Your Trusted Partner
-            <span className="block text-primary-200"></span>
-          </h1>
-
-          <p className="reveal is-visible reveal-delay-2 mt-6 max-w-xl text-lg leading-relaxed text-primary-100/90">
-            G2 Pharmacy provides wholesale and retail of pharmaceutical drugs,
-            medical supplies, and hospital supplies — delivering quality
-            healthcare products across Monrovia and beyond.
+    <section id="home" className="relative overflow-hidden pt-[4.25rem]">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-10 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:pb-24 lg:pt-16">
+        {/* Text */}
+        <div className="flex flex-col justify-center lg:col-span-7">
+          <p className="eyebrow">
+            <Plus className="h-3.5 w-3.5 text-leaf-500" />
+            Wholesale &amp; retail pharmacy
           </p>
 
-          <div className="reveal is-visible reveal-delay-3 mt-8 flex flex-wrap gap-4">
-            <a
-              href="#services"
-              className="group inline-flex items-center gap-2 rounded-xl bg-accent-500 px-6 py-3.5 text-base font-semibold text-accent-950 shadow-lg transition-all hover:bg-accent-400 hover:shadow-xl"
-            >
-              Our Services
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          <h1 className="mt-6 text-[2.9rem] font-extrabold leading-[0.95] sm:text-7xl lg:text-[5.5rem]">
+            Trusted medicine for every{" "}
+            <span className="relative whitespace-nowrap text-navy-600">
+              Liberian
+              <svg
+                viewBox="0 0 300 16"
+                preserveAspectRatio="none"
+                className="absolute -bottom-1 left-0 h-3 w-full text-leaf-400 sm:-bottom-2"
+                aria-hidden="true"
+              >
+                <path d="M2 11C70 3 200 1 298 9" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
+              </svg>
+            </span>{" "}
+            home.
+          </h1>
+
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-navy-950/65 sm:text-xl">
+            Genuine pharmaceutical drugs, medical supplies and hospital
+            supplies — at the counter, in bulk, and for clinics and hospitals
+            across Monrovia and beyond.
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a href="#branches" className="btn-navy group">
+              <MapPin className="h-4 w-4" />
+              Find a branch
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-            >
-              Contact Us
+            <a href={siteData.whatsappLink} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+              <WhatsAppIcon className="h-4 w-4 text-leaf-600" />
+              Chat on WhatsApp
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="reveal is-visible reveal-delay-4 mt-14 grid grid-cols-3 gap-6 border-t border-primary-300/20 pt-8">
-            <div>
-              <p className="font-display text-3xl font-extrabold text-white">17+</p>
-              <p className="mt-1 text-sm text-primary-200">Years of Experience</p>
-            </div>
-            <div>
-              <p className="font-display text-3xl font-extrabold text-white">5</p>
-              <p className="mt-1 text-sm text-primary-200">Branches in Monrovia</p>
-            </div>
-            <div>
-              <p className="font-display text-3xl font-extrabold text-white">3</p>
-              <p className="mt-1 text-sm text-primary-200">Core Services</p>
-            </div>
+          <dl className="mt-12 grid max-w-xl grid-cols-3 divide-x divide-navy-900/10 border-y border-navy-900/10">
+            {stats.map((s) => (
+              <div key={s.label} className="flex flex-col py-5 pr-3 first:pl-0 [&:not(:first-child)]:pl-4 sm:[&:not(:first-child)]:pl-6">
+                <dt className="order-2 mt-1 text-xs leading-snug text-navy-950/55 sm:text-sm">{s.label}</dt>
+                <dd className="font-display text-2xl font-bold text-navy-950 sm:text-3xl">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {/* Photo */}
+        <div className="relative lg:col-span-5">
+          <div className="relative h-[22rem] overflow-hidden rounded-[2rem] bg-navy-100 sm:h-[28rem] lg:h-full lg:min-h-[36rem]">
+            <Img
+              name="hero"
+              widths={[960, 1600, 2000]}
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              alt={siteData.heroImageAlt}
+              className="h-full w-full object-cover object-[30%_center]"
+              priority
+            />
+          </div>
+
+          {/* Sign-style badge */}
+          <div className="absolute -bottom-5 left-5 right-5 flex items-center gap-4 rounded-2xl bg-navy-900 p-4 text-white shadow-[0_20px_40px_-12px_rgba(6,15,46,0.45)] sm:left-auto sm:right-6 sm:w-[22rem] lg:-left-10 lg:right-auto">
+            <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-leaf-500 text-navy-950">
+              <Plus className="h-6 w-6" />
+            </span>
+            <span>
+              <span className="block font-display text-lg font-bold leading-tight">Open across Monrovia</span>
+              <span className="text-sm text-navy-200">Elwa · Sinkor · SD Cooper · Red Light</span>
+            </span>
+          </div>
+
+          {/* Est. stamp */}
+          <div className="absolute -top-4 right-4 hidden h-24 w-24 rotate-[-8deg] flex-col items-center justify-center rounded-full border-2 border-dashed border-navy-900/25 bg-paper text-center sm:flex">
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-navy-950/50">Est.</span>
+            <span className="font-display text-2xl font-extrabold leading-none text-navy-900">
+              {siteData.establishedYear}
+            </span>
           </div>
         </div>
-      </div>
-
-      {/* Floating service badges */}
-      <div className="absolute bottom-8 right-8 hidden flex-col gap-3 xl:flex">
-        {[
-          { icon: Truck, label: "Wholesale" },
-          { icon: HeartPulse, label: "Hospital Supplies" },
-          { icon: ShieldCheck, label: "Retail Pharmacy" },
-        ].map((item, i) => (
-          <div
-            key={item.label}
-            className="animate-float flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md"
-            style={{ animationDelay: `${i * 0.8}s` }}
-          >
-            <item.icon className="h-5 w-5 text-accent-400" />
-            <span className="text-sm font-medium text-white">{item.label}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 100" fill="none" className="w-full" preserveAspectRatio="none">
-          <path d="M0 100V40C240 80 480 0 720 20C960 40 1200 80 1440 40V100H0Z" fill="white" />
-        </svg>
       </div>
     </section>
   );

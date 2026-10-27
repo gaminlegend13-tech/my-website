@@ -1,76 +1,76 @@
-import { MapPin, Store, Tag } from "lucide-react";
-import { siteData } from "@/data/siteData";
+import { ArrowUpRight, MapPin } from "lucide-react";
+import { mapsLink, siteData } from "@/data/siteData";
+import Img from "@/components/Img";
+import Plus from "@/components/Plus";
+import SectionHeader from "@/components/SectionHeader";
 
-const typeColors: Record<string, string> = {
-  Retail: "bg-primary-100 text-primary-700",
-  Wholesale: "bg-secondary-100 text-secondary-700",
-  "Wholesale & Retail": "bg-accent-100 text-accent-700",
-};
+type Branch = (typeof siteData.branches)[number];
+
+function BranchCard({ branch, index, featured }: { branch: Branch; index: number; featured?: boolean }) {
+  return (
+    <article
+      className={`reveal group flex flex-col overflow-hidden rounded-3xl bg-navy-900 ring-1 ring-white/10 ${
+        featured ? "lg:col-span-2 lg:row-span-2" : ""
+      }`}
+    >
+      <div className="relative flex-1 overflow-hidden bg-navy-800">
+        <Img
+          name={branch.image}
+          widths={[640, 1000]}
+          sizes={featured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"}
+          alt={`G2 Pharmacy ${branch.name}, ${branch.location}`}
+          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] ${
+            featured ? "aspect-[4/3] lg:aspect-auto" : "aspect-[4/3]"
+          }`}
+        />
+        <span className="absolute left-4 top-4 rounded-full bg-paper px-3 py-1 text-xs font-semibold text-navy-950">
+          {branch.type}
+        </span>
+      </div>
+
+      {/* Sign board */}
+      <div className="flex items-end justify-between gap-4 border-t-4 border-leaf-500 p-5 sm:p-6">
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-leaf-400">
+            <Plus className="h-3 w-3" />
+            {branch.isHeadOffice ? "Head office" : `Branch #${index}`}
+          </p>
+          <h3 className={`mt-2 font-bold text-white ${featured ? "text-3xl" : "text-xl"}`}>{branch.name}</h3>
+          <p className="mt-1.5 flex items-start gap-1.5 text-sm text-navy-200">
+            <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
+            {branch.location}
+          </p>
+        </div>
+        <a
+          href={mapsLink(branch.location)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-leaf-500 hover:text-navy-950"
+          aria-label={`Directions to ${branch.name}`}
+          title="Get directions"
+        >
+          <ArrowUpRight className="h-5 w-5" />
+        </a>
+      </div>
+    </article>
+  );
+}
 
 export default function Branches() {
   return (
-    <section id="branches" className="bg-white py-24">
+    <section id="branches" className="bg-navy-950 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="reveal mx-auto max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-primary-50 px-4 py-1.5 text-sm font-semibold text-primary-700">
-            Our Locations
-          </span>
-          <h2 className="mt-4 font-display text-3xl font-extrabold text-slate-900 sm:text-4xl">
-            Our Branches
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            Five convenient locations across Monrovia, Liberia — find the
-            branch nearest to you.
-          </p>
-        </div>
+        <SectionHeader
+          dark
+          number="03"
+          label="Branches"
+          title={`${siteData.branches.length} doors across Monrovia.`}
+          intro="Walk in, call ahead, or tap the arrow for directions to the branch nearest you."
+        />
 
-        {/* Grid */}
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {siteData.branches.map((branch, index) => (
-            <div
-              key={branch.name}
-              className={`reveal reveal-delay-${(index % 3) + 1} group overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-slate-200/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-                branch.isHeadOffice ? "ring-2 ring-primary-500" : ""
-              }`}
-            >
-              {/* Image */}
-              <div className="relative h-52 overflow-hidden">
-                <img
-                  src={branch.image}
-                  alt={branch.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {branch.isHeadOffice && (
-                  <div className="absolute top-4 right-4 rounded-full bg-primary-600 px-3 py-1 text-xs font-semibold text-white shadow-md">
-                    Head Office
-                  </div>
-                )}
-              </div>
-              {/* Body */}
-              <div className="p-6">
-                <div className="flex items-center gap-2 text-primary-600">
-                  <Store className="h-5 w-5" />
-                  <h3 className="font-display text-lg font-bold text-slate-900">
-                    {branch.name}
-                  </h3>
-                </div>
-                <div className="mt-3 flex items-start gap-2 text-slate-600">
-                  <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" />
-                  <p className="text-sm leading-relaxed">{branch.location}</p>
-                </div>
-                <div className="mt-4">
-                  <span
-                    className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
-                      typeColors[branch.type] ?? "bg-slate-100 text-slate-700"
-                    }`}
-                  >
-                    <Tag className="h-3 w-3" />
-                    {branch.type}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <BranchCard key={branch.name} branch={branch} index={index} featured={branch.isHeadOffice} />
           ))}
         </div>
       </div>

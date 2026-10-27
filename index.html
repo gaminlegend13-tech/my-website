@@ -2,28 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/LOGO.PNG.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="G2 Pharmacy — Wholesale & retail of pharmaceutical drugs and medical supplies, hospital supplies across Liberia since 2008." />
     <title>G2 Pharmacy — Wholesale & Retail Pharmacy in Monrovia, Liberia | Since 2008</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-    <link rel="canonical" href="https://g2pharmacy.com/" />
+    <meta name="description" content="G2 Pharmacy — Wholesale & retail of pharmaceutical drugs and medical supplies, hospital supplies across Liberia since 2008." />
+    <meta name="theme-color" content="#0a1a4a" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://www.g2pharmacy.com/" />
+
+    <!-- Start loading the hero photo right away, before the JavaScript runs. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/img/hero-1600.webp"
+      imagesrcset="/img/hero-960.webp 960w, /img/hero-1600.webp 1600w, /img/hero-2000.webp 2000w"
+      imagesizes="(min-width: 1024px) 45vw, 100vw"
+      fetchpriority="high"
+    />
+
     <meta property="og:title" content="G2 Pharmacy — Wholesale & Retail Pharmacy in Liberia" />
     <meta property="og:description" content="Wholesale & retail of pharmaceutical drugs and medical supplies, hospital supplies across Liberia since 2008." />
-    <meta property="og:url" content="https://g2pharmacy.com/" />
+    <meta property="og:url" content="https://www.g2pharmacy.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://g2pharmacy.com/LOGO.PNG.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://g2pharmacy.com/LOGO.PNG.png">
+    <meta property="og:image" content="https://www.g2pharmacy.com/img/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://www.g2pharmacy.com/img/og.jpg" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Pharmacy",
       "name": "G2 Pharmacy",
-      "image": "https://g2pharmacy.com/LOGO.PNG.png",
-      "url": "https://g2pharmacy.com",
+      "image": "https://www.g2pharmacy.com/img/og.jpg",
+      "logo": "https://www.g2pharmacy.com/img/logo-512.png",
+      "url": "https://www.g2pharmacy.com",
+      "telephone": "+231778641667",
+      "email": "g2pharmacy@yahoo.com",
+      "foundingDate": "2008",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "ELWA Junction",
@@ -31,10 +48,12 @@
         "addressRegion": "Montserrado",
         "addressCountry": "LR"
       },
+      "sameAs": ["https://www.facebook.com/profile.php?id=61577927575802"],
       "description": "Wholesale & retail of pharmaceutical drugs and medical supplies, hospital supplies across Liberia since 2008."
     }
     </script>
-</head>
+    <script>document.documentElement.classList.add("js")</script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

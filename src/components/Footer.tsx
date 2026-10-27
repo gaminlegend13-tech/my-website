@@ -1,119 +1,58 @@
-import { Mail, Phone, MapPin, Facebook } from "lucide-react";
-import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { siteData } from "@/data/siteData";
-
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Branches", href: "#branches" },
-  { label: "Leadership", href: "#ceo" },
-  { label: "Products", href: "#products" },
-  { label: "Donations", href: "#donations" },
-  { label: "Contact", href: "#contact" },
-];
+import { navLinks, siteData } from "@/data/siteData";
+import Plus from "@/components/Plus";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-950 text-primary-100">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-4">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-2">
-              <img
-                src="/LOGO.PNG.png"
-                alt="G2 Pharmacy logo"
-                className="h-14 w-14 object-contain drop-shadow-md"
-              />
-              <span className="font-display text-xl font-extrabold text-white">
-                G2 Pharmacy
-              </span>
+    <footer className="overflow-hidden bg-navy-950 text-navy-200">
+      <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-3">
+              <img src="/img/logo-96.webp" alt="" width={48} height={43} loading="lazy" className="h-11 w-auto" />
+              <span className="font-display text-xl font-bold text-white">G2 Pharmacy</span>
             </div>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-primary-200/80">
-              Wholesale and retail of pharmaceutical drugs, medical supplies,
+            <p className="mt-5 max-w-sm leading-relaxed">
+              Wholesale and retail of pharmaceutical drugs, medical supplies
               and hospital supplies in Liberia since {siteData.establishedYear}.
-              Five branches serving Monrovia with quality healthcare products.
             </p>
-            <div className="mt-6 space-y-3">
-              <a
-                href={`mailto:${siteData.email}`}
-                className="flex items-center gap-3 text-sm text-primary-200 transition-colors hover:text-white"
-              >
-                <Mail className="h-4 w-4" />
-                {siteData.email}
-              </a>
-              <a
-                href={siteData.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm text-primary-200 transition-colors hover:text-white"
-              >
-                <Phone className="h-4 w-4" />
-                {siteData.phone}
-                <WhatsAppIcon className="h-3.5 w-3.5 text-green-500" />
-              </a>
-              <div className="flex items-center gap-3 text-sm text-primary-200">
-                <MapPin className="h-4 w-4" />
-                Elwa Junction, Monrovia, Liberia
-              </div>
-              <a
-                href={siteData.facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm text-primary-200 transition-colors hover:text-white"
-              >
-                <Facebook className="h-4 w-4" />
-                Follow us on Facebook
-              </a>
-            </div>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <h4 className="font-display text-base font-bold text-white">
-              Quick Links
-            </h4>
-            <ul className="mt-4 space-y-2">
+          <nav className="lg:col-span-3" aria-label="Footer">
+            <h4 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-white">Explore</h4>
+            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 lg:grid-cols-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-primary-200 transition-colors hover:text-white"
-                  >
+                  <a href={link.href} className="transition-colors hover:text-white">
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-display text-base font-bold text-white">
-              Our Services
-            </h4>
-            <ul className="mt-4 space-y-2">
-              {siteData.services.map((service) => (
-                <li key={service.title}>
-                  <a
-                    href="#services"
-                    className="text-sm text-primary-200 transition-colors hover:text-white"
-                  >
-                    {service.title}
-                  </a>
-                </li>
-              ))}
+          <div className="lg:col-span-4">
+            <h4 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-white">Reach us</h4>
+            <ul className="mt-4 space-y-2.5">
+              <li><a href={siteData.whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp · {siteData.phone}</a></li>
+              <li><a href={`mailto:${siteData.email}`} className="hover:text-white">{siteData.email}</a></li>
+              <li>{siteData.headOffice}</li>
+              <li><a href={siteData.facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">Facebook</a></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 border-t border-primary-800/50 pt-8">
-          <p className="text-center text-sm text-primary-300/70">
-            &copy; {new Date().getFullYear()} G2 Pharmacy. All rights reserved.
-            Founded by {siteData.ceo.name}.
-          </p>
+        {/* Big sign-style wordmark */}
+        <div
+          aria-hidden="true"
+          className="mt-16 flex select-none items-center gap-[2vw] font-display text-[19vw] font-extrabold leading-[0.8] tracking-tighter text-white/[0.06] lg:text-[15rem]"
+        >
+          <Plus className="h-[0.6em] w-[0.6em] text-leaf-500/30" />
+          G2
+        </div>
+
+        <div className="flex flex-col gap-2 border-t border-white/10 py-6 text-sm text-navy-300 sm:flex-row sm:justify-between">
+          <p>&copy; {new Date().getFullYear()} G2 Pharmacy. All rights reserved.</p>
+          <p>Founded by {siteData.ceo.name}.</p>
         </div>
       </div>
     </footer>

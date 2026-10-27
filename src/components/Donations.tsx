@@ -1,62 +1,43 @@
 import { Heart } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import Img from "@/components/Img";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function Donations() {
   return (
-    <section id="donations" className="bg-white py-24">
+    <section id="donations" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="reveal mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-accent-50 px-4 py-1.5 text-sm font-semibold text-accent-700">
-            <Heart className="h-4 w-4" />
-            Giving Back
-          </span>
-          <h2 className="mt-4 font-display text-3xl font-extrabold text-slate-900 sm:text-4xl">
-            Our Donations & Community Impact
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            At G2 Pharmacy, we believe in giving back to the communities that
-            have supported us. Here are some of our donation and outreach
-            initiatives.
-          </p>
-        </div>
+        <SectionHeader
+          number="06"
+          label="Giving back"
+          title="Community comes first."
+          intro="We believe in giving back to the communities that have supported us. Here are some of our donation and outreach initiatives."
+        />
 
-        {/* Cards */}
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mt-16 grid gap-5 md:grid-cols-3">
           {siteData.donations.map((donation, index) => (
-            <div
-              key={donation.title}
-              className={`reveal reveal-delay-${index + 1} group overflow-hidden rounded-3xl bg-slate-50 shadow-lg ring-1 ring-slate-200/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl`}
-            >
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src={donation.image}
+            <article key={donation.title} className={`reveal reveal-delay-${index + 1} group`}>
+              <div className="relative overflow-hidden rounded-3xl bg-navy-100">
+                <Img
+                  name={donation.image}
+                  widths={[640, 1000]}
+                  sizes="(min-width: 768px) 32vw, 100vw"
                   alt={donation.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 shadow-md">
-                  <Heart className="h-5 w-5 text-accent-500" fill="currentColor" />
-                </div>
+                <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-paper text-leaf-600">
+                  <Heart className="h-5 w-5" fill="currentColor" />
+                </span>
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-lg font-bold text-slate-900">
-                  {donation.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                  {donation.description}
-                </p>
-              </div>
-            </div>
+              <h3 className="mt-5 text-xl font-bold">{donation.title}</h3>
+              <p className="mt-2 leading-relaxed text-navy-950/65">{donation.description}</p>
+            </article>
           ))}
         </div>
 
-        {/* Note */}
-        <div className="reveal mt-12 rounded-2xl border border-dashed border-primary-300 bg-primary-50/50 px-6 py-5 text-center">
-          <p className="text-sm font-medium text-primary-700">
-            We'll be adding more details and photos of our donation activities
-            soon. Check back for updates.
-          </p>
-        </div>
+        <p className="reveal mt-12 border-t border-navy-900/10 pt-6 text-sm text-navy-950/55">
+          More photos and details of our donation activities are coming soon.
+        </p>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
-import { CheckCircle2 } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import Img from "@/components/Img";
+import Plus from "@/components/Plus";
 
 const highlights = [
   "Quality-assured pharmaceutical products",
@@ -10,59 +11,60 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Image */}
-          <div className="reveal relative">
-            <div className="overflow-hidden rounded-3xl shadow-2xl">
-              <img
-                src={siteData.aboutImage}
-                alt={siteData.aboutImageAlt}
-                className="h-[480px] w-full object-cover"
-              />
-            </div>
-            {/* Experience badge */}
-            <div className="absolute -bottom-6 -right-6 rounded-2xl bg-primary-600 px-8 py-6 shadow-xl">
-              <p className="font-display text-4xl font-extrabold text-white">2008</p>
-              <p className="mt-1 text-sm font-medium text-primary-100">Year Established</p>
-            </div>
-            {/* Decorative accent */}
-            <div className="absolute -left-4 -top-4 -z-10 h-32 w-32 rounded-3xl bg-primary-100" />
+    <section id="about" className="py-24 lg:py-32">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+        {/* Image */}
+        <div className="reveal relative lg:col-span-5">
+          <div className="overflow-hidden rounded-[2rem] bg-navy-100">
+            <Img
+              name="about"
+              widths={[640, 1000]}
+              sizes="(min-width: 1024px) 38vw, 100vw"
+              alt={siteData.aboutImageAlt}
+              className="aspect-[4/5] w-full object-cover"
+            />
           </div>
+          <div className="absolute -bottom-6 right-6 rounded-2xl bg-leaf-500 px-6 py-5 text-navy-950">
+            <p className="font-display text-4xl font-extrabold leading-none">{siteData.establishedYear}</p>
+            <p className="mt-1.5 text-sm font-semibold">Year established</p>
+          </div>
+        </div>
 
-          {/* Text */}
-          <div className="reveal reveal-delay-2">
-            <span className="inline-block rounded-full bg-primary-50 px-4 py-1.5 text-sm font-semibold text-primary-700">
-              About Us
-            </span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Committed to Healthcare Excellence in Liberia
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-slate-600">
-              Founded in {siteData.establishedYear} by {siteData.ceo.name}, G2
-              Pharmacy has grown into one of Liberia's trusted names in
-              pharmaceutical distribution. From our Head Office at Elwa
-              Junction to our five branches across Monrovia, we serve retail
-              customers, wholesale partners, and hospitals with a shared
-              commitment to quality, reliability, and affordability.
+        {/* Text */}
+        <div className="reveal reveal-delay-1 flex flex-col justify-center lg:col-span-7">
+          <p className="eyebrow">
+            <Plus className="h-3.5 w-3.5 text-leaf-500" />
+            01 <span className="text-navy-900/30">/</span> About us
+          </p>
+          <h2 className="mt-5 text-3xl font-bold leading-[1.15] sm:text-4xl lg:text-[2.75rem]">
+            Since {siteData.establishedYear}, we've grown from a single counter
+            into one of Liberia's <span className="text-navy-600">most trusted names</span> in
+            pharmaceutical distribution.
+          </h2>
+
+          <div className="mt-8 grid gap-6 text-[17px] leading-relaxed text-navy-950/65 sm:grid-cols-2">
+            <p>
+              Founded by {siteData.ceo.name}, G2 Pharmacy serves retail
+              customers, wholesale partners and hospitals from our Head Office
+              at Elwa Junction and branches across Monrovia.
             </p>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              We believe that access to quality medicine is a right, not a
+            <p>
+              We believe access to quality medicine is a right, not a
               privilege. That belief drives everything we do — from sourcing
-              genuine pharmaceutical products to giving back to the communities
-              we serve.
+              genuine products to giving back to the communities we serve.
             </p>
-
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {highlights.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-500" />
-                  <span className="text-sm font-medium text-slate-700">{item}</span>
-                </li>
-              ))}
-            </ul>
           </div>
+
+          <ul className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-navy-900/10 bg-navy-900/10 sm:grid-cols-2">
+            {highlights.map((item) => (
+              <li key={item} className="flex items-start gap-3 bg-paper p-5">
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-navy-900 text-leaf-400">
+                  <Plus className="h-3 w-3" />
+                </span>
+                <span className="font-medium text-navy-950">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

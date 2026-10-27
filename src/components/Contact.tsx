@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Facebook, Phone } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import Plus from "@/components/Plus";
 import { siteData } from "@/data/siteData";
-import { supabase } from "@/lib/supabase";
+
+const channels = [
+  { icon: WhatsAppIcon, label: "WhatsApp", value: siteData.phone, href: siteData.whatsappLink, external: true },
+  { icon: Phone, label: "Call us", value: siteData.phone, href: `tel:${siteData.phoneLink}` },
+  { icon: Mail, label: "Email", value: siteData.email, href: `mailto:${siteData.email}` },
+  { icon: Facebook, label: "Facebook", value: "Follow G2 Pharmacy", href: siteData.facebookUrl, external: true },
+];
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -15,175 +22,137 @@ export default function Contact() {
     setSubmitting(true);
     setError("");
 
-    const { error: insertError } = await supabase
-      .from("contact_messages")
-      .insert({ name: form.name, email: form.email, message: form.message });
+    try {
+      // Load the database client only when someone actually sends a message.
+      const { supabase } = await import("@/lib/supabase");
+      const { error: insertError } = await supabase
+        .from("contact_messages")
+        .insert({ name: form.name, email: form.email, message: form.message });
+      if (insertError) throw insertError;
 
-    setSubmitting(false);
-
-    if (insertError) {
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch {
       setError("Something went wrong. Please try again or call us directly.");
-      return;
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitted(true);
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
-    <section id="contact" className="bg-slate-50 py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="reveal mx-auto max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-primary-50 px-4 py-1.5 text-sm font-semibold text-primary-700">
-            Get In Touch
-          </span>
-          <h2 className="mt-4 font-display text-3xl font-extrabold text-slate-900 sm:text-4xl">
-            Contact Us
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            Have a question about our products or services? We'd love to hear
-            from you.
+    <section id="contact" className="bg-navy-900 py-24 text-white lg:py-32">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+        {/* Info */}
+        <div className="reveal lg:col-span-5">
+          <p className="eyebrow text-navy-200">
+            <Plus className="h-3.5 w-3.5 text-leaf-400" />
+            07 <span className="text-navy-400">/</span> Contact
           </p>
+          <h2 className="mt-4 text-5xl font-bold leading-[1.02] text-white sm:text-6xl">
+            Let's talk.
+          </h2>
+          <p className="mt-5 max-w-md text-lg leading-relaxed text-navy-200">
+            Retail customer, wholesale partner or hospital — our team is ready
+            to help. WhatsApp is the fastest way to reach us.
+          </p>
+
+          <ul className="mt-10 divide-y divide-white/10 border-y border-white/10">
+            {channels.map(({ icon: Icon, label, value, href, external }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="group flex items-center gap-4 py-4"
+                >
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-leaf-400 transition-colors group-hover:bg-leaf-500 group-hover:text-navy-950">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm text-navy-300">{label}</span>
+                    <span className="font-semibold text-white">{value}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+            <li className="flex items-center gap-4 py-4">
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-leaf-400">
+                <MapPin className="h-5 w-5" />
+              </span>
+              <span>
+                <span className="block text-sm text-navy-300">Head office</span>
+                <span className="font-semibold text-white">{siteData.headOffice}</span>
+              </span>
+            </li>
+          </ul>
         </div>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-2">
-          {/* Contact info */}
-          <div className="reveal space-y-6">
-            <h3 className="font-display text-2xl font-bold text-slate-900">
-              Reach Out to Us
-            </h3>
-            <p className="text-base leading-relaxed text-slate-600">
-              Whether you're a retail customer, a wholesale partner, or a
-              hospital looking for supplies, our team is ready to help. Reach
-              out through any of the channels below.
-            </p>
+        {/* Form */}
+        <div className="reveal reveal-delay-1 lg:col-span-7">
+          <form onSubmit={handleSubmit} className="rounded-[2rem] bg-white p-6 text-navy-950 sm:p-10">
+            <h3 className="text-2xl font-bold sm:text-3xl">Send us a message</h3>
+            <p className="mt-2 text-navy-950/55">We'll get back to you as soon as possible.</p>
 
-            <div className="space-y-4">
-              <a
-                href={`mailto:${siteData.email}`}
-                className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200/60 transition-all hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100">
-                  <Mail className="h-6 w-6 text-primary-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-slate-400">Email</p>
-                  <p className="text-base font-semibold text-slate-900">{siteData.email}</p>
-                </div>
-              </a>
+            {submitted && (
+              <div role="status" className="mt-6 flex items-center gap-3 rounded-xl bg-success-50 px-4 py-3 text-sm font-medium text-success-700">
+                <CheckCircle2 className="h-5 w-5" />
+                Thank you! Your message has been sent.
+              </div>
+            )}
 
-              <a
-                href={siteData.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200/60 transition-all hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100">
-                  <Phone className="h-6 w-6 text-primary-600" />
-                </div>
-                <div>
-                  <p className="flex items-center gap-1.5 text-sm font-medium text-slate-400">
-                    Phone
-                    <WhatsAppIcon className="h-4 w-4 text-green-600" />
-                  </p>
-                  <p className="text-base font-semibold text-slate-900">{siteData.phone}</p>
-                </div>
-              </a>
+            {error && (
+              <div role="alert" className="mt-6 flex items-center gap-3 rounded-xl bg-error-50 px-4 py-3 text-sm font-medium text-error-700">
+                <AlertCircle className="h-5 w-5" />
+                {error}
+              </div>
+            )}
 
-              <div className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200/60">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100">
-                  <MapPin className="h-6 w-6 text-primary-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-slate-400">Head Office</p>
-                  <p className="text-base font-semibold text-slate-900">
-                    Elwa Junction, Monrovia, Liberia
-                  </p>
-                </div>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor="c-name" className="mb-1.5 block text-sm font-semibold">Your name</label>
+                <input
+                  id="c-name"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="field"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label htmlFor="c-email" className="mb-1.5 block text-sm font-semibold">Your email</label>
+                <input
+                  id="c-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="field"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label htmlFor="c-message" className="mb-1.5 block text-sm font-semibold">Message</label>
+                <textarea
+                  id="c-message"
+                  required
+                  rows={5}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="field resize-none"
+                  placeholder="How can we help you?"
+                />
               </div>
             </div>
-          </div>
 
-          {/* Contact form */}
-          <div className="reveal reveal-delay-2">
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200/60"
-            >
-              <h3 className="font-display text-2xl font-bold text-slate-900">
-                Send Us a Message
-              </h3>
-              <p className="mt-2 text-sm text-slate-500">
-                Fill out the form and we'll get back to you as soon as possible.
-              </p>
-
-              {submitted && (
-                <div className="mt-6 flex items-center gap-3 rounded-xl bg-success-50 px-4 py-3 text-sm font-medium text-success-700">
-                  <CheckCircle2 className="h-5 w-5" />
-                  Thank you! Your message has been sent.
-                </div>
-              )}
-
-              {error && (
-                <div className="mt-6 flex items-center gap-3 rounded-xl bg-error-50 px-4 py-3 text-sm font-medium text-error-700">
-                  <AlertCircle className="h-5 w-5" />
-                  {error}
-                </div>
-              )}
-
-              <div className="mt-6 space-y-5">
-                <div>
-                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full rounded-xl border border-slate-200 px-4 py-3 text-base text-slate-900 outline-none transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full rounded-xl border border-slate-200 px-4 py-3 text-base text-slate-900 outline-none transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
-                    Message
-                  </label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full resize-none rounded-xl border border-slate-200 px-4 py-3 text-base text-slate-900 outline-none transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
-                    placeholder="How can we help you?"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 px-6 py-3.5 text-base font-semibold text-white shadow-md transition-all hover:bg-primary-700 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {submitting ? "Sending..." : "Send Message"}
-                  <Send className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-            </form>
-          </div>
+            <button type="submit" disabled={submitting} className="btn-navy group mt-6 w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
+              {submitting ? "Sending..." : "Send message"}
+              <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </button>
+          </form>
         </div>
       </div>
     </section>

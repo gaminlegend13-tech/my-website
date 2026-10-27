@@ -1,123 +1,76 @@
 /** @type {import('tailwindcss').Config} */
+
+// Brand colours taken from the G2 storefront signage and logo:
+// deep royal navy, a bright "cross" green, and warm off-white paper.
+const navy = {
+  50: '#f2f6ff',
+  100: '#e4ecfe',
+  200: '#c5d7fd',
+  300: '#93b5fa',
+  400: '#5b8df6',
+  500: '#2f6bf0',
+  600: '#1e4fd0',
+  700: '#16389a',
+  800: '#0f2a72',
+  900: '#0a1a4a',
+  950: '#060f2e',
+};
+
+const leaf = {
+  50: '#f0fcf4',
+  100: '#ddf8e6',
+  200: '#b5efc9',
+  300: '#7fe3a1',
+  400: '#3dd06f',
+  500: '#16b550',
+  600: '#0e9f45',
+  700: '#0b7f38',
+  800: '#0b6430',
+  900: '#0a5229',
+  950: '#032e15',
+};
+
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eefcf7',
-          100: '#d6f7e9',
-          200: '#aeeed3',
-          300: '#7adfb6',
-          400: '#46c995',
-          500: '#22b07a',
-          600: '#168a62',
-          700: '#136d50',
-          800: '#125641',
-          900: '#104736',
-          950: '#06281d',
+        navy,
+        leaf,
+        paper: {
+          DEFAULT: '#f5f3ee',
+          dark: '#ebe7de',
         },
-        secondary: {
-          50: '#f0f6ff',
-          100: '#e0eaff',
-          200: '#c8d8ff',
-          300: '#a3bcff',
-          400: '#7a97ff',
-          500: '#5a72f5',
-          600: '#4551e8',
-          700: '#3a3ec9',
-          800: '#3236a1',
-          900: '#2e337f',
-          950: '#1d1e4b',
-        },
-        accent: {
-          50: '#fffbeb',
-          100: '#fff3c4',
-          200: '#ffe588',
-          300: '#ffd24d',
-          400: '#ffbb20',
-          500: '#f5990a',
-          600: '#d97306',
-          700: '#b45008',
-          800: '#913d0e',
-          900: '#77330f',
-          950: '#451a05',
-        },
+        // Older names, still used by the staff/admin pages.
+        primary: navy,
+        accent: leaf,
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
           600: '#16a34a',
           700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-        },
-        warning: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
         },
         error: {
           50: '#fef2f2',
           100: '#fee2e2',
           200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
           500: '#ef4444',
           600: '#dc2626',
           700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
         },
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        display: ['Sora', 'system-ui', 'sans-serif'],
-      },
-      animation: {
-        'fade-in-up': 'fadeInUp 0.7s ease-out forwards',
-        'fade-in': 'fadeIn 0.7s ease-out forwards',
-        'scale-in': 'scaleIn 0.5s ease-out forwards',
-        'slide-in-left': 'slideInLeft 0.7s ease-out forwards',
-        'slide-in-right': 'slideInRight 0.7s ease-out forwards',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s ease-in-out infinite',
+        sans: ['"Figtree Variable"', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif'],
       },
       keyframes: {
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.9)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        slideInLeft: {
-          '0%': { opacity: '0', transform: 'translateX(-50px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        slideInRight: {
-          '0%': { opacity: '0', transform: 'translateX(50px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-15px)' },
-        },
+      },
+      animation: {
+        marquee: 'marquee 40s linear infinite',
       },
     },
   },

@@ -1,8 +1,8 @@
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useAuth } from "@/hooks/useAuth";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Branches from "@/components/Branches";
@@ -11,17 +11,23 @@ import Products from "@/components/Products";
 import Donations from "@/components/Donations";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import AdminLogin from "@/components/AdminLogin";
-import AdminDashboard from "@/components/AdminDashboard";
+import WhatsAppButton from "@/components/WhatsAppButton";
+
+// The staff pages (and the database/router code they need) are loaded only
+// when someone opens #/login or #/admin, so regular visitors never download them.
+const AdminApp = lazy(() => import("./AdminApp"));
+
+const isAdminHash = () => /^#\/(login|admin)/.test(window.location.hash);
 
 function PublicSite() {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <Navbar />
       <main>
         <Hero />
+        <Marquee />
         <About />
         <Services />
         <Branches />
@@ -31,39 +37,33 @@ function PublicSite() {
         <Contact />
       </main>
       <Footer />
-    </div>
+      <WhatsAppButton />
+    </>
   );
 }
 
-function ProtectedAdmin() {
-  const { session, loading } = useAuth();
+export default function App() {
+  const [admin, setAdmin] = useState(isAdminHash);
 
-  if (loading) {
+  useEffect(() => {
+    const onHashChange = () => setAdmin(isAdminHash());
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  if (admin) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-50">
-        <p className="text-slate-500">Loading...</p>
-      </div>
+      <Suspense
+        fallback={
+          <div className="flex min-h-screen items-center justify-center bg-navy-950">
+            <p className="text-navy-200">Loading...</p>
+          </div>
+        }
+      >
+        <AdminApp />
+      </Suspense>
     );
   }
 
-  if (!session) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return <AdminDashboard />;
+  return <PublicSite />;
 }
-
-function App() {
-  return (
-    <HashRouter>
-      <Routes>
-        <Route path="/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<ProtectedAdmin />} />
-        <Route path="/" element={<PublicSite />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </HashRouter>
-  );
-}
-
-export default App;

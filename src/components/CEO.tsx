@@ -1,79 +1,56 @@
-import { Quote } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import Img from "@/components/Img";
+import Plus from "@/components/Plus";
+
+const facts = [
+  { value: `${siteData.establishedYear}`, label: "Founded G2 Pharmacy" },
+  { value: `${siteData.branches.length}`, label: "Branches established" },
+  { value: `${siteData.yearsOfService}+`, label: "Years of service" },
+];
 
 export default function CEO() {
   return (
-    <section id="ceo" className="relative overflow-hidden bg-primary-950 py-24">
-      {/* Decorative blobs */}
-      <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-primary-800/40 blur-3xl" />
-      <div className="absolute -right-20 bottom-10 h-72 w-72 rounded-full bg-primary-700/30 blur-3xl" />
-
-      {/* Logo watermark */}
-      <img
-        src="/LOGO.PNG.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[16rem] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain opacity-[0.07] sm:w-[20rem] lg:w-[24rem]"
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-5">
-          {/* Image */}
-          <div className="reveal lg:col-span-2">
-            <div className="relative mx-auto max-w-sm">
-              <div className="overflow-hidden rounded-3xl shadow-2xl ring-4 ring-white/10">
-                <img
-                  src={siteData.ceo.image}
-                  alt={siteData.ceo.name}
-                  className="aspect-[4/5] w-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-accent-500 px-6 py-2 text-sm font-bold text-accent-950 shadow-lg">
-                {siteData.ceo.title}
-              </div>
+    <section id="ceo" className="py-24 lg:py-32">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+        {/* Portrait */}
+        <div className="reveal lg:col-span-5">
+          <div className="relative mx-auto max-w-md overflow-hidden rounded-[2rem] bg-white">
+            <Img
+              name={siteData.ceo.image}
+              widths={[560, 900]}
+              sizes="(min-width: 1024px) 34vw, 90vw"
+              alt={siteData.ceo.name}
+              className="aspect-[4/5] w-full object-cover object-top"
+            />
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-navy-900 px-6 py-4 text-white">
+              <span className="font-display text-lg font-bold">{siteData.ceo.name}</span>
+              <span className="text-sm text-leaf-400">{siteData.ceo.title}</span>
             </div>
           </div>
+        </div>
 
-          {/* Text */}
-          <div className="reveal reveal-delay-2 lg:col-span-3">
-            <span className="inline-block rounded-full border border-primary-300/30 bg-primary-800/40 px-4 py-1.5 text-sm font-semibold text-primary-100">
-              Our Leadership
-            </span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold text-white sm:text-4xl">
-              {siteData.ceo.name}
-            </h2>
-            <p className="mt-1 text-lg font-medium text-accent-400">
-              {siteData.ceo.title}
-            </p>
+        {/* Words */}
+        <div className="reveal reveal-delay-1 lg:col-span-7">
+          <p className="eyebrow">
+            <Plus className="h-3.5 w-3.5 text-leaf-500" />
+            04 <span className="text-navy-900/30">/</span> Leadership
+          </p>
 
-            <div className="mt-8 relative">
-              <Quote className="absolute -top-2 -left-2 h-10 w-10 text-primary-700/50" />
-              <p className="relative pl-10 text-lg leading-relaxed text-primary-100/90">
-                {siteData.ceo.bio}
-              </p>
-            </div>
+          <h2 className="mt-6 text-3xl font-bold leading-[1.15] sm:text-4xl lg:text-5xl">
+            Built on one vision: quality medicine for{" "}
+            <span className="text-navy-600">every community</span> in Liberia.
+          </h2>
 
-            <div className="mt-8 flex flex-wrap gap-6">
-              <div className="flex items-center gap-3 rounded-2xl border border-primary-300/20 bg-primary-800/30 px-5 py-3">
-                <div className="text-center">
-                  <p className="font-display text-2xl font-extrabold text-white">2008</p>
-                  <p className="text-xs text-primary-200">Founded G2 Pharmacy</p>
-                </div>
+          <p className="mt-8 text-[17px] leading-relaxed text-navy-950/65">{siteData.ceo.bio}</p>
+
+          <dl className="mt-10 grid grid-cols-3 gap-3">
+            {facts.map((f) => (
+              <div key={f.label} className="flex flex-col rounded-2xl border border-navy-900/10 bg-white p-4 sm:p-5">
+                <dt className="order-2 mt-1 text-xs text-navy-950/55 sm:text-sm">{f.label}</dt>
+                <dd className="font-display text-2xl font-bold text-navy-900 sm:text-3xl">{f.value}</dd>
               </div>
-              <div className="flex items-center gap-3 rounded-2xl border border-primary-300/20 bg-primary-800/30 px-5 py-3">
-                <div className="text-center">
-                  <p className="font-display text-2xl font-extrabold text-white">5</p>
-                  <p className="text-xs text-primary-200">Branches Established</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 rounded-2xl border border-primary-300/20 bg-primary-800/30 px-5 py-3">
-                <div className="text-center">
-                  <p className="font-display text-2xl font-extrabold text-white">17+</p>
-                  <p className="text-xs text-primary-200">Years of Service</p>
-                </div>
-              </div>
-            </div>
-          </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
