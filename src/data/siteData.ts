@@ -1,5 +1,6 @@
 // All the business details shown on the website live here.
 // Images are names of files in /public/img, e.g. "branch1" -> branch1-640.webp / branch1-1000.webp.
+// For donations, "shape" says whether the photo is wider than tall ("wide") or taller than wide ("tall").
 
 const establishedYear = 2008;
 
@@ -91,18 +92,21 @@ export const siteData = {
       description:
         "G2 Pharmacy has donated essential medicines and medical supplies to local clinics and community health programs across Monrovia.",
       image: "donation1",
+      shape: "wide",
     },
     {
       title: "Medical Supply Donations",
       description:
         "We regularly contribute medical supplies to hospitals and healthcare centers, supporting those who cannot afford essential care.",
       image: "donation2",
+      shape: "tall",
     },
     {
       title: "Volunteer & Aid Programs",
       description:
         "Our team actively participates in volunteer initiatives, distributing food and medicine to communities in need throughout Liberia.",
       image: "donation3",
+      shape: "tall",
     },
   ],
 };

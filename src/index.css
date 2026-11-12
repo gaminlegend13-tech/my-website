@@ -8,73 +8,284 @@
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    @apply bg-paper font-sans text-navy-950/80 antialiased;
-    font-feature-settings: "ss01";
+    @apply bg-shop font-sans text-navy-950/80 antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display text-navy-950;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
-  /* Keep section titles clear of the fixed navbar when jumping to them. */
+  /* Keep section titles clear of the floating navbar when jumping to them. */
   section[id] {
-    scroll-margin-top: 4.5rem;
+    scroll-margin-top: 5.5rem;
   }
   ::selection {
     @apply bg-leaf-300 text-navy-950;
   }
   :focus-visible {
-    @apply outline-none ring-2 ring-leaf-500 ring-offset-2 ring-offset-paper;
+    @apply outline-none ring-2 ring-leaf-500 ring-offset-2 ring-offset-shop;
   }
 }
 
 @layer components {
-  /* Fade-up on scroll. Elements start hidden only once JS has marked the page. */
+  /* ---------------------------------------------------------------
+     Type voices
+     --------------------------------------------------------------- */
+
+  /* The signboard voice: wide, heavy capitals like the lettering above
+     every G2 shop door. Used for the hero and section titles. */
+  .sign {
+    font-stretch: 125%;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    /* !important so Tailwind's text-size utilities can't loosen it */
+    line-height: 0.92 !important;
+  }
+  /* Narrow capitals for small facts printed on a card: branch type, tags. */
+  .tag {
+    font-stretch: 75%;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------------------------------------------------------------
+     Buttons: the hover colour rises up from the bottom of the pill.
+     --------------------------------------------------------------- */
+  .btn-navy,
+  .btn-leaf,
+  .btn-ghost,
+  .btn-light {
+    @apply relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3.5 text-[15px] font-semibold;
+    transition: color 0.35s ease, border-color 0.35s ease;
+  }
+  :is(.btn-navy, .btn-leaf, .btn-ghost, .btn-light)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-fill, transparent);
+    transform: translateY(102%);
+    transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1);
+  }
+  :is(.btn-navy, .btn-leaf, .btn-ghost, .btn-light):hover::before,
+  :is(.btn-navy, .btn-leaf, .btn-ghost, .btn-light):focus-visible::before {
+    transform: none;
+  }
+  .btn-navy {
+    @apply bg-navy-900 text-white hover:text-navy-950;
+    --btn-fill: theme("colors.leaf.400");
+  }
+  .btn-leaf {
+    @apply bg-leaf-500 text-navy-950;
+    --btn-fill: #fff;
+  }
+  .btn-ghost {
+    @apply border border-navy-900/20 text-navy-900 hover:border-navy-900 hover:text-white;
+    --btn-fill: theme("colors.navy.900");
+  }
+  .btn-light {
+    @apply bg-white text-navy-950;
+    --btn-fill: theme("colors.leaf.400");
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-navy-900/15 bg-shop px-4 py-3.5 text-base text-navy-950 outline-none transition placeholder:text-navy-900/35 focus:border-navy-600 focus:bg-white focus:ring-4 focus:ring-navy-500/10;
+  }
+
+  /* ---------------------------------------------------------------
+     Scroll reveals. Elements start hidden only once JS has marked
+     the page, and each kind is switched on with "is-visible".
+     --------------------------------------------------------------- */
+
+  /* Soft fade-up for paragraphs and small blocks. */
   .js .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease-out, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .js .reveal.is-visible {
     opacity: 1;
     transform: none;
   }
-  .reveal-delay-1 { transition-delay: 0.08s; }
-  .reveal-delay-2 { transition-delay: 0.16s; }
-  .reveal-delay-3 { transition-delay: 0.24s; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
 
-  /* Small "+01 About" style label used above each section title. */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-navy-700;
+  /* Headings: each word rises out of its own mask. */
+  .rise-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    /* room for descenders so the mask doesn't clip them */
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+  .rise-word > span {
+    display: inline-block;
+  }
+  .js .rise .rise-word > span {
+    transform: translateY(115%) rotate(4deg);
+    transform-origin: left top;
+    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: calc(var(--i, 0) * 55ms + var(--rise-delay, 0ms));
+  }
+  .js .rise.is-visible .rise-word > span {
+    transform: none;
   }
 
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-colors duration-200;
+  /* Photos open like a capsule: a blue half and a green half slide apart. */
+  .shutter-half {
+    position: absolute;
+    display: none;
+    z-index: 2;
+    transition: transform 1.15s cubic-bezier(0.7, 0, 0.2, 1) 0.1s;
   }
-  .btn-navy {
-    @apply btn bg-navy-900 text-white hover:bg-navy-700;
+  .js .shutter-half {
+    display: block;
   }
-  .btn-leaf {
-    @apply btn bg-leaf-500 text-navy-950 hover:bg-leaf-400;
+  .shutter[data-axis="y"] .shutter-half:first-of-type { inset: 0 0 50% 0; }
+  .shutter[data-axis="y"] .shutter-half:last-of-type { inset: 50% 0 0 0; }
+  .shutter[data-axis="x"] .shutter-half:first-of-type { inset: 0 50% 0 0; }
+  .shutter[data-axis="x"] .shutter-half:last-of-type { inset: 0 0 0 50%; }
+  .shutter-half:first-of-type { @apply bg-navy-600; }
+  .shutter-half:last-of-type { @apply bg-leaf-500; }
+  .shutter.is-visible[data-axis="y"] .shutter-half:first-of-type { transform: translateY(-101%); }
+  .shutter.is-visible[data-axis="y"] .shutter-half:last-of-type { transform: translateY(101%); }
+  .shutter.is-visible[data-axis="x"] .shutter-half:first-of-type { transform: translateX(-101%); }
+  .shutter.is-visible[data-axis="x"] .shutter-half:last-of-type { transform: translateX(101%); }
+
+  /* Cards pop in with a small overshoot. */
+  .js .pop {
+    opacity: 0;
+    transform: translateY(36px) scale(0.92);
+    transition: opacity 0.5s ease-out, transform 0.9s cubic-bezier(0.2, 1.3, 0.3, 1);
+    transition-delay: calc(var(--i, 0) * 80ms);
   }
-  .btn-ghost {
-    @apply btn border border-navy-900/15 text-navy-900 hover:border-navy-900/40 hover:bg-white;
+  .js .pop.is-visible {
+    opacity: 1;
+    transform: none;
   }
 
-  .field {
-    @apply w-full rounded-xl border border-navy-900/15 bg-paper/60 px-4 py-3 text-base text-navy-950 outline-none transition placeholder:text-navy-900/35 focus:border-navy-600 focus:bg-white focus:ring-4 focus:ring-navy-500/10;
+  /* ---------------------------------------------------------------
+     Hero load sequence
+     --------------------------------------------------------------- */
+  .hero-shutter {
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.2, 1);
   }
+  .hero-open .hero-shutter:first-of-type { transform: translateX(-101%); }
+  .hero-open .hero-shutter:last-of-type { transform: translateX(101%); }
+
+  /* ---------------------------------------------------------------
+     Small looping details
+     --------------------------------------------------------------- */
+  .spin-slow {
+    animation: spin 22s linear infinite;
+  }
+  .bob {
+    animation: bob 5.5s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * -0.9s);
+  }
+  .ping-ring {
+    animation: ping-ring 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  }
+  .draw-check {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: draw 0.6s 0.15s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+  }
+  .scroll-cue {
+    animation: cue 1.8s cubic-bezier(0.7, 0, 0.2, 1) infinite;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+@keyframes ping-ring {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(260%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .js .reveal {
+  .js .reveal,
+  .js .pop,
+  .js .rise .rise-word > span {
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .animate-marquee {
+  .js .shutter-half,
+  .hero-shutter {
+    display: none;
+  }
+  .spin-slow,
+  .bob,
+  .ping-ring,
+  .scroll-cue {
     animation: none;
+  }
+  .draw-check {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  :is(.btn-navy, .btn-leaf, .btn-ghost, .btn-light)::before {
+    transition: none;
+  }
+}
+
+/* Product cards lean toward the mouse; the pack floats above the card. */
+.tilt {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+.tilt:hover {
+  transition-duration: 0.15s, 0.4s;
+  box-shadow: 0 40px 70px -40px rgba(10, 26, 74, 0.5);
+}
+.tilt-lift {
+  transform: translateZ(0);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tilt:hover .tilt-lift {
+  transform: translateZ(56px) scale(1.04);
+}
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(47, 107, 240, 0.16), transparent 55%);
+}
+.tilt:hover .tilt-glare {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt,
+  .tilt:hover .tilt-lift {
+    transform: none;
   }
 }

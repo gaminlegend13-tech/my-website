@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 
-// Adds "is-visible" to each .reveal element the first time it scrolls into view.
+// Adds "is-visible" the first time an animated element scrolls into view.
+//   .reveal   soft fade-up for paragraphs and small blocks
+//   .rise     headings whose words rise out of a mask
+//   .shutter  photos that open like a capsule
+//   .pop      cards that pop in
 export function useScrollReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -12,10 +16,12 @@ export function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
 
-    document.querySelectorAll(".reveal:not(.is-visible)").forEach((el) => observer.observe(el));
+    document
+      .querySelectorAll(":is(.reveal, .rise, .shutter, .pop):not(.is-visible)")
+      .forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);

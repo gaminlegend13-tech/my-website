@@ -1,36 +1,31 @@
-import Plus from "@/components/Plus";
+import Rise from "@/components/Rise";
 
 type Props = {
-  number: string;
-  label: string;
   title: string;
   intro?: string;
+  /** Use on navy, blue and green sections. */
   dark?: boolean;
+  /** Replace the default title size. */
+  titleSize?: string;
 };
 
-// "+02 Services" label, big title and optional intro, shared by every section.
-export default function SectionHeader({ number, label, title, intro, dark }: Props) {
+// Signboard-style title with an optional intro beside it, shared by the sections.
+export default function SectionHeader({
+  title,
+  intro,
+  dark,
+  titleSize = "text-[2.6rem] sm:text-6xl lg:text-[4.6rem]",
+}: Props) {
   return (
-    <div className="reveal grid gap-6 lg:grid-cols-12 lg:items-end">
-      <div className="lg:col-span-7">
-        <p className={`eyebrow ${dark ? "text-navy-200" : ""}`}>
-          <Plus className="h-3.5 w-3.5 text-leaf-500" />
-          {number}
-          <span className={dark ? "text-navy-400" : "text-navy-900/30"}>/</span>
-          {label}
-        </p>
-        <h2
-          className={`mt-4 text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl ${
-            dark ? "text-white" : ""
-          }`}
-        >
-          {title}
-        </h2>
-      </div>
+    <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-10">
+      <Rise
+        text={title}
+        className={`sign lg:col-span-8 ${titleSize} ${dark ? "text-white" : ""}`}
+      />
       {intro && (
         <p
-          className={`text-lg leading-relaxed lg:col-span-5 lg:pb-2 ${
-            dark ? "text-navy-200" : "text-navy-950/65"
+          className={`reveal max-w-md text-lg leading-relaxed lg:col-span-4 lg:pb-1.5 ${
+            dark ? "text-white/75" : "text-navy-950/65"
           }`}
         >
           {intro}

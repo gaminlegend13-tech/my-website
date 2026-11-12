@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
 // Brand colours taken from the G2 storefront signage and logo:
-// deep royal navy, a bright "cross" green, and warm off-white paper.
+// the navy signboard, the royal blue of the logo, the green shop pillars,
+// and the cool white of the shop interior.
 const navy = {
   50: '#f2f6ff',
   100: '#e4ecfe',
@@ -37,9 +38,10 @@ export default {
       colors: {
         navy,
         leaf,
+        shop: '#f3f6fb',
         paper: {
-          DEFAULT: '#f5f3ee',
-          dark: '#ebe7de',
+          DEFAULT: '#f3f6fb',
+          dark: '#e6ecf5',
         },
         // Older names, still used by the staff/admin pages.
         primary: navy,
@@ -60,17 +62,14 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Figtree Variable"', 'system-ui', 'sans-serif'],
-        display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif'],
+        // One family, three voices: the width axis runs from condensed (62%)
+        // to expanded (125%), which is what the "sign" headings use.
+        sans: ['"Archivo Variable"', 'system-ui', 'sans-serif'],
+        display: ['"Archivo Variable"', 'system-ui', 'sans-serif'],
       },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-      },
-      animation: {
-        marquee: 'marquee 40s linear infinite',
+      transitionTimingFunction: {
+        swift: 'cubic-bezier(0.7, 0, 0.2, 1)',
+        settle: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
       },
     },
   },
